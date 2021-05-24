@@ -1,25 +1,26 @@
-ion-menu ion-content {
-  --background: var(--ion-item-background, var(--ion-background-color, #fff));
-}
 
 ion-menu.md ion-content {
   --padding-start: 8px;
   --padding-end: 8px;
   --padding-top: 20px;
   --padding-bottom: 20px;
+  text-align: center !important;
 }
 
 ion-menu.md ion-list {
   padding: 20px 0;
+  text-align: center !important;
 }
 
 ion-menu.md ion-note {
   margin-bottom: 30px;
+  text-align: center !important;
 }
 
 ion-menu.md ion-list-header,
 ion-menu.md ion-note {
   padding-left: 10px;
+  text-align: center !important;
 }
 
 ion-menu.md ion-list#inbox-list {
@@ -116,4 +117,85 @@ ion-note {
 
 ion-item.selected {
   --color: var(--ion-color-primary);
+}
+
+ion-list-header{
+  display:block;
+  text-align: center;
+}
+
+
+ion-header{
+  ion-toolbar{
+      ion-title{
+          text-align: center;
+      }
+  }
+}
+
+:root{
+  .dark-theme{
+      --ion-color-primary: #04eafa;
+      --ion-color-primary-rgb: 224, 205,205;
+      --ion-color-primary-contrast: #ffffff;
+      --ion-color-primary-contrast-rgb: 255, 255, 255;
+      --ion-color-primary-shade: #cf424d;
+      --ion-color-primary-tint: #ed5d69;
+      
+      ion-content{
+          --background: #212121;
+      }
+
+      ion-item{
+          --background: #303030;
+          --color:#fff;
+      }
+
+      ion-toolbar{
+          --background: black;
+          --color: #fff;
+      }
+      ion-list{
+          --ion-item-background:#303030;
+          --ion-item-color: #fff;
+
+          ion-list-header{
+              --color: #fff;
+          }
+
+          ion-note{
+            --background: #303030;
+            --color: #fff;
+          }
+      }
+
+      ion-card{
+          --color:#fff;
+          --background:#303030;
+          ion-card-title{
+              --color: #fff;
+              --background:#424242;
+          }
+      }
+
+      ion-tab-bar{
+          --background: black;
+          --color: #fff;
+      }
+
+      ion-split-pane{
+        --background: #212121;
+          --color: #fff;
+      }
+
+      ion-menu{
+        --background: black;
+        --color: #fff;
+      }
+      ion-list-header{
+        --background: #212121;
+        --color: #fff;
+      }
+  }
+
 }

@@ -1,0 +1,36 @@
+ion-item{
+    --background: transparent;
+    text-align: center;
+}
+
+.icon{
+    font-size: 100px;
+}
+
+.icon2{
+    font-size: 50px;
+}
+
+.col{
+    text-align: center;
+}
+
+ion-datetime{
+    text-align: center;
+    width: 100%;
+}
+
+ion-input{
+    text-align: center;
+}
+
+ion-list-header{
+    ion-label{
+        text-align: center;
+    }
+}
+
+.item-selected:hover{
+    --background: aqua;
+    cursor: pointer;
+}

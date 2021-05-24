@@ -1,0 +1,48 @@
+
+table {
+    width:90%;
+    border: 1px solid #000;
+  }
+  thead {
+    text-align: center;
+  }
+  th, td {
+    width: 10%;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #000;
+    border-collapse: collapse;
+    padding: 0.3em;
+    caption-side: bottom;
+  }
+  table .presionar:hover {
+    background-color: #BDC6EA;
+    cursor: pointer;
+  }
+  caption {
+    padding: 0.3em;
+  }
+  #imagen{
+    width: 75px;
+  }
+  
+  #searchbar{
+    --placeholder-font-weight: 75px;
+  }
+
+  ion-searchbar{
+      width: 100%;
+  }
+  ion-datetime{
+    width: 100%;
+  }
+  #icon{
+    font-size: 40px;
+  }
+  #labelitem{
+      text-align: right;
+  }
+  caption {
+    padding: 0.3rem;
+  }
+ 

@@ -3,19 +3,107 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Perfil</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formeditUser" (ngSubmit)="this.sendForm()">
+        <ion-grid>
+          <ion-row justify-content-around>
+            <ion-col>
+              <ion-avatar>
+                <img src="{{this.image}}">
+              </ion-avatar>
+              <mat-form-field>
+                <ngx-mat-file-input #fileIm formControlName="file" placeholder="Avatar" [accept]="'image/*'" (change)="this.selectAvatar()">
+                </ngx-mat-file-input>
+                <mat-icon *ngIf="(this.image==this.defaultImage)" matSuffix>account_circle</mat-icon>
+                <button mat-icon-button matSuffix *ngIf="(this.image!=this.defaultImage)" (click)="fileIm.clear($event);this.clearImage()">
+                  <mat-icon matSuffix>clear</mat-icon>
+                </button>
+              </mat-form-field>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="centrado" size="auto">
+              <ion-item class="itemcentrado">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input formControlName="email" clearInput placeholder="Email"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-around>
+            <ion-col class="centrado" size="auto">
+              <ion-item class="itemcentrado">
+                <ion-label position="floating">Nombre</ion-label>
+                <ion-input formControlName="nombre" clearInput placeholder="Nombre"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col class="centrado" size="auto">
+              <ion-item class="itemcentrado">
+                <ion-label position="floating">Telefono</ion-label>
+                <ion-input formControlName="telef" clearInput placeholder="Telefono"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-around>
+            <ion-col class="centrado" size="auto">
+              <ion-item class="itemcentrado">
+                <ion-label position="floating">Dirección</ion-label>
+                <ion-input formControlName="adress" clearInput placeholder="Dirección"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col class="centrado" size="auto">
+              <ion-item class="itemcentrado" matTooltip="La contraseña debe contener al menos 6 caracteres, números, mayúsculas y minúsculas y signos especiales">
+                <ion-input formControlName="contra"  [type]="this.typePassWord" placeholder="Contraseña"></ion-input>
+                <a class="type-toggle" (click)="this.changePasswordType()">
+                  <ion-icon slot="end" [class]="this.typeClassIconPass" [name]="this.iconPassW"></ion-icon>
+               </a>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-around>
+            <ion-col class="centrado" size="auto">
+              <ion-button type="submit" [disabled]="!formeditUser.valid">Editar</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Reportar errores o sugerencias</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formemail" (ngSubmit)="this.sendEmail()">
+        <ion-grid>
+          <ion-row justify-content-around>
+            <ion-col class="centrado" size="auto">
+              <ion-item class="itemcentrado">
+                <ion-label position="floating">Asunto del Mensaje</ion-label>
+                <ion-input formControlName="asunto" clearInput placeholder="Asunto del Mensaje"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col class="centrado" size="auto">
+              <quill-editor   [styles]="{ flex: '1 1 auto' }" [formControl]="formModulText"></quill-editor>
+            </ion-col>
+            <ion-col class="centrado" size="auto">
+              <ion-button type="submit" [disabled]="!formemail.valid">Enviar</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
 </ion-content>
+
+

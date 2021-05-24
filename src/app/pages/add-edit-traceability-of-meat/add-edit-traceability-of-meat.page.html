@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row justify-content-around>
+        <ion-col class="col">
+          <ion-icon class="icon" src="../../assets/iconos-images/archivo.svg"></ion-icon>
+        </ion-col>  
+    </ion-row>
+  </ion-grid>
+  <app-table [tabletitle]="'Registro Carne'" [tooltiptitle]="'Presiona para añadir'" [searachSelect]="this.searachSelect" [model]="this.model" [columns]="this.columns" [ref]="this.ref" (messageEvent)="this.SelectMeat($event)"></app-table>
+  <form [formGroup]="form" (ngSubmit)="this.sendForm()">
+    <ion-grid>
+      <ion-row justify-content-around>
+        <ion-col>
+          
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Producto</ion-label>
+            <ion-input formControlName="producto" clearInput placeholder="Producto" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Lote</ion-label>
+            <ion-input formControlName="lote" clearInput placeholder="Lote" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Distribuidor</ion-label>
+            <ion-input formControlName="supplier" clearInput placeholder="Distribuidor" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-around>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Fecha Llegada</ion-label>
+            <ion-datetime formControlName="arrivaldate" placeholder="Selecciona" displayFormat="YYYY-MM-DD" readonly></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Fecha Inicio</ion-label>
+            <ion-datetime formControlName="startdate" placeholder="Selecciona" displayFormat="YYYY-MM-DD"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-around>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Fecha Fin</ion-label>
+            <ion-datetime formControlName="enddate" placeholder="Selecciona" displayFormat="YYYY-MM-DD"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          
+        </ion-col>
+        <ion-col>
+          <app-selects [model]="this.model_Select_Signed" [properti]="this.properti_model_Select" [selected]="this.select_signed"  (messageEvent)="this.getSelectSigned($event)"></app-selects>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-around>
+        <ion-col>
+          <ion-button expand="block" (click)="this.getOut()">Volver 
+            <ion-icon style="margin-left: 10px;" name="arrow-back-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button *ngIf="this.trazOfMeat!=null" expand="block" color="danger" (click)="this.deleteRecord()">Delete 
+            <ion-icon style="margin-left: 10px;" name="trash-outline"></ion-icon>
+          </ion-button>   
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" type="submit" [disabled]="!form.valid">Guardar 
+            <ion-icon style="margin-left: 10px;" name="save-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

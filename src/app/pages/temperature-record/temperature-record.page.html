@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro Temperaturas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-table [searachSelect]="this.searachSelect" [model]="this.model" [columns]="this.columns" [ref]="this.ref"></app-table>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title></ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-grid>
+        <ion-row justify-content-around>
+          <ion-col>
+            <ion-row justify-content-around>
+              <ion-col class="col">
+                <ion-icon class="icon" src="../../assets/iconos-images/note.svg"></ion-icon>
+              </ion-col>
+            </ion-row>
+            
+              <ion-row justify-content-around>
+                <ion-col>
+                  <ion-list>
+                    <ion-item-sliding *ngFor="let app of this.appliances;let i=index">
+                      <ion-item class="item-selected" (click)="this.editAppliance(app)" matTooltip="Presiona para editar o desliza hacia la izquierda para eliminar.">
+                        <ion-label>{{app.name}}</ion-label>
+                        <ion-icon slot="start" src="../../assets/iconos-images/refrigerator.svg"></ion-icon>
+                      </ion-item>
+                      <ion-item-options side="end">
+                        <ion-item-option color="danger" (click)="this.deleteAppliance(app)">
+                          <ion-icon name="trash" style="font-size: x-large;"></ion-icon>
+                        </ion-item-option>
+                      </ion-item-options>
+                    </ion-item-sliding>
+                  </ion-list>
+                  
+                </ion-col>
+              </ion-row>
+              
+          </ion-col>
+          <ion-col>
+            <form [formGroup]="form" (ngSubmit)="this.sendForm()">
+              <ion-grid>
+                <ion-row justify-content-around>
+                  <ion-col class="col">
+                    <ion-icon class="icon" src="../../assets/iconos-images/add-file.svg"></ion-icon>
+                  </ion-col>
+                </ion-row>
+                <ion-row justify-content-around>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label position="floating">Nombre Electrodomestico</ion-label>
+                      <ion-input formControlName="name" clearInput placeholder="Nombre Electrodomestico"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row justify-content-around>
+                  <ion-col>
+                    <ion-button expand="block" (click)="this.reset()">Limpiar 
+                      <ion-icon style="margin-left: 10px;" name="arrow-back-circle-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button expand="block" type="submit" [disabled]="!form.valid">Guardar 
+                      <ion-icon style="margin-left: 10px;" name="save-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+
+              </ion-grid>
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{this.tittle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <ion-grid>
+    <ion-row style="text-align: center;" justify-content-around>
+        <ion-col>
+          <ion-icon style="font-size: 100px;" src="../../assets/iconos-images/agua.svg"></ion-icon>
+        </ion-col>  
+    </ion-row>
+  </ion-grid>
+  <form [formGroup]="form" (ngSubmit)="this.sendForm()">
+    <ion-grid>
+      <ion-row justify-content-around>
+        <ion-col>
+  
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Punto Muestreo</ion-label>
+            <ion-input formControlName="samplingpoint" clearInput placeholder="Punto Muestreo"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-around>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Control organoléptico</ion-label>
+            <ion-input type="decimal" formControlName="organoleptic_control" clearInput placeholder="Control organoléptico"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+            
+        </ion-col>
+        <ion-col>
+            <app-selects [model]="this.model_Select_Condition" [properti]="this.properti_model_Select" [selected]="this.select_condition"  (messageEvent)="this.getSelectCondition($event)"></app-selects>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-around>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Fecha</ion-label>
+            <ion-datetime formControlName="date" placeholder="Selecciona" displayFormat="YYYY-MM-DD"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+            
+        </ion-col>
+        <ion-col>
+          <app-selects [model]="this.model_Select_Signed" [properti]="this.properti_model_Select" [selected]="this.select_signed"  (messageEvent)="this.getSelectSigned($event)"></app-selects>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-around>
+        <ion-col>
+          <ion-button expand="block" (click)="this.getOut()">Volver 
+            <ion-icon style="margin-left: 10px;" name="arrow-back-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button *ngIf="this.watterRecord!=null" expand="block" color="danger" (click)="this.deleteRecord()">Delete 
+            <ion-icon style="margin-left: 10px;" name="trash-outline"></ion-icon>
+          </ion-button>   
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" type="submit" [disabled]="!form.valid">Guardar 
+            <ion-icon style="margin-left: 10px;" name="save-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

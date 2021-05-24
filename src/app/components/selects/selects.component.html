@@ -1,0 +1,5 @@
+<ion-item>
+  <ion-select multiple="false" [placeholder]="this.model" #IonSelect (ionChange)="ChangeValue($event)">
+    <ion-select-option *ngFor="let obj of this.arrayData" [value]="obj">{{this.damePropiedades(obj,this.properti)}}</ion-select-option>
+  </ion-select>
+</ion-item>

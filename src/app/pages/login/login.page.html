@@ -1,0 +1,40 @@
+<!--<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>-->
+
+<ion-content>
+ 
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-img src="../../assets/registro.png"></ion-img>
+        <ion-card-title>LOGIN</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <div id="formulario">
+          <form [formGroup]="form" (ngSubmit)="this.sendForm()">
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input formControlName="email"></ion-input>
+            </ion-item>
+            <ion-label color="danger" *ngIf="!this.form.controls.email.valid && (this.form.controls.email.touched || this.form.controls.email.dirty)">* El email ha de ser válido y es requerido</ion-label>
+            <ion-item matTooltip="La contraseña es obligatoria, debe contener al menos 6 caracteres, números, mayúsculas y minúsculas y signos especiales">
+              <ion-label position="floating">Password</ion-label>
+              <ion-input formControlName="passw" type="Password"></ion-input>
+            </ion-item>
+            <ion-label color="danger" *ngIf="!this.form.controls.passw.valid && (this.form.controls.passw.touched || this.form.controls.passw.dirty)">* La contraseña es obligatoria, debe conener al menos 6 caracteres, números, mayúsculas y minúsculas y signos especiales</ion-label>
+            <ion-item>
+              <ion-label>Mantener sesión iniciada</ion-label>
+              <ion-checkbox slot="start" (ionChange)="this.ChangeCheck($event)"></ion-checkbox>
+            </ion-item>
+            <ion-button style="text-align: center !important;" type="submit" [disabled]="!form.valid">LOGIN</ion-button>
+          </form>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+</ion-content>

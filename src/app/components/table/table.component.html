@@ -1,0 +1,86 @@
+
+  <ion-refresher *ngIf="this.ionrefreshactivate" slot="fixed" (ionRefresh)="this.Refres($event)">
+    <ion-refresher-content
+    pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+      
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-card>
+    <ion-card-header>
+      <ion-grid>
+        <ion-row justify-content-around>
+          <ion-col style="text-align: center;">
+            <ion-label>Order</ion-label><br>
+            <ion-icon id="icon" name="{{this.button_order}}" (click)="this.ClickButtoOrder()"></ion-icon>
+          </ion-col>
+          <ion-col size="auto">
+              <ion-datetime *ngIf="this.dateSearch" placeholder="Select Date" displayFormat="YYYY-MM-DD" display-timezone="utc" (ionChange)="this.changeDate($event)"></ion-datetime>
+              <ion-searchbar *ngIf="!this.dateSearch" #IonSearch id="searchbar" debounce="500" [placeholder]="typesearch"  [disabled]="disableSearch" (ionChange)="this.onChangeSearchBar($event)"></ion-searchbar>
+          </ion-col>
+          <ion-col style="text-align: center;">
+              <ion-label>Case Search</ion-label>
+              <ion-select #IonSelectTable multiple="false" placeholder="Select One" #IonSelect (ionChange)="ChangeValue($event)">
+                <ion-select-option *ngFor="let obj of this.searachSelect" [value]="obj">{{obj.name}}</ion-select-option>
+              </ion-select>
+          </ion-col>
+          <ion-col>
+            <div>
+              <ion-fab vertical="center" horizontal="center" slot="fixed" (click)="goToUpdateOrAdd(null)">
+                <ion-fab-button>
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+    <ion-card-content>
+      <table [dataSource]="dataSource" align="center" mat-table>
+        <caption>{{this.tabletitle}}</caption>
+        <!-- Image Column -->
+        <ng-container *ngFor="let column of columns; trackBy: trackByProperty">
+          <ng-container *ngIf="column.type === 'image'" [matColumnDef]="column.property">
+              <th *matHeaderCellDef> {{ column.label }}</th>
+              <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>
+                <img id="imagen" [src]="this.damePropiedades(row,column.property)" class="avatar h-8 w-8 align-middle">
+              </td>
+          </ng-container>
+        </ng-container>
+      
+        <!-- Text Columns -->
+        <ng-container *ngFor="let column of columns; trackBy: trackByProperty">
+            <ng-container *ngIf="column.type === 'text'" [matColumnDef]="column.property">
+                <th *matHeaderCellDef> {{ column.label }}</th>
+                <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>{{this.damePropiedades(row,column.property)}}</td>
+            </ng-container>
+        </ng-container>
+      
+      
+        <!-- Date Columns -->
+        <ng-container *ngFor="let column of columns; trackBy: trackByProperty">
+            <ng-container *ngIf="column.type === 'date'" [matColumnDef]="column.property">
+                <th *matHeaderCellDef> {{ column.label }}</th>
+                <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>{{ this.damePropiedades(row,column.property)  | date: 'yyyy-MM-dd' }}</td>
+            </ng-container>
+        </ng-container>
+      
+        <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
+        <tr class="presionar" [matTooltip]="this.tooltiptitle" *matRowDef="let row; columns: visibleColumns;" (click)="goToUpdateOrAdd(row)"
+             mat-row></tr>
+      </table>
+      <mat-paginator [length]="length" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" class="sticky left-0" (page)="changePaginator($event)" showFirstLastButtons="true"></mat-paginator>
+      <ion-grid *ngIf="!this.ionrefreshactivate">
+        <ion-row justify-content-around>
+          <ion-col>
+            <ion-button expand="block" color="primary" (click)="this.Refres()">Actualizar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+
+

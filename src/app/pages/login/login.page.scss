@@ -1,0 +1,54 @@
+ion-content{
+    --background: #fff url('../../../assets/prueba.jpg') no-repeat center center / cover;
+    ion-card{
+        width: 750px;
+        --background: #fff url('../../../assets/un-ordenador-rodeado-de-libros.jpg') no-repeat center center / cover;
+        ion-card-header{
+            ion-img{
+                width: 100px;
+                margin: 0 auto;
+            }
+            ion-card-title{
+                text-align: center;
+                color: white;
+               
+            }
+        }
+        ion-card-content{
+            margin-top: 20%;
+            transform: translate(24%, -50%);
+            ion-item{
+                --background: transparent;
+                color: white;
+                ion-label{
+                    text-align: center;
+                    color: white;
+                }
+            }
+            ion-button{
+               text-align: center;
+            }
+        }
+    }
+}
+
+/*#container{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translate(25%, -50%);
+}*/
+#container{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#formulario{
+    width: 50%; 
+    text-align: center;
+    
+} 
