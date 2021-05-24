@@ -14,6 +14,7 @@ export class SelectsComponent implements OnInit, AfterViewInit{
   @Input() model:string="";
   @Input() properti:string="";
   @Input() selected:any=null;
+  @Input() titulo:string="";
   @Output() messageEvent = new EventEmitter<any>();
   @ViewChild('IonSelect') ionSelect:ElementRef<IonSelect>;
   constructor(private ApiS:ApiService,private Auth:AuthenticationService) { }

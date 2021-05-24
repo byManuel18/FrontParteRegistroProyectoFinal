@@ -14,10 +14,10 @@ export class MeatrecordPage implements OnInit {
   public searachSelect:SelectSearch[]=[{id:"no",name:"Disabled"},{id:"product",name:"Product"},
   {id:"lote",name:"Lote"},{id:"date",name:"Date"},{id:"supplier",name:"Supplier"}];
 
-  public columns:TableColumn<MeatRecord>[]=[{label:"Product",property:"product",type:"text",visible:true},
-  {label:"Supplier",property:"supplier",type:"text",visible:true},
+  public columns:TableColumn<MeatRecord>[]=[{label:"Producto",property:"product",type:"text",visible:true},
+  {label:"Distribuidor",property:"supplier",type:"text",visible:true},
   {label:"Lote",property:"lote",type:"text",visible:true},
-  {label:"Date",property:"date",type:"date",visible:true}
+  {label:"Fecha",property:"date",type:"date",visible:true}
   ];
   public model:string="MeatRecord";
   public ref:any=AddEditMeatRecordPage;

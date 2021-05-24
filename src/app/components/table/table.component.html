@@ -12,7 +12,7 @@
       <ion-grid>
         <ion-row justify-content-around>
           <ion-col style="text-align: center;">
-            <ion-label>Order</ion-label><br>
+            <ion-label>Orden</ion-label><br>
             <ion-icon id="icon" name="{{this.button_order}}" (click)="this.ClickButtoOrder()"></ion-icon>
           </ion-col>
           <ion-col size="auto">
@@ -20,7 +20,7 @@
               <ion-searchbar *ngIf="!this.dateSearch" #IonSearch id="searchbar" debounce="500" [placeholder]="typesearch"  [disabled]="disableSearch" (ionChange)="this.onChangeSearchBar($event)"></ion-searchbar>
           </ion-col>
           <ion-col style="text-align: center;">
-              <ion-label>Case Search</ion-label>
+              <ion-label>Tipo Búsqueda</ion-label>
               <ion-select #IonSelectTable multiple="false" placeholder="Select One" #IonSelect (ionChange)="ChangeValue($event)">
                 <ion-select-option *ngFor="let obj of this.searachSelect" [value]="obj">{{obj.name}}</ion-select-option>
               </ion-select>
