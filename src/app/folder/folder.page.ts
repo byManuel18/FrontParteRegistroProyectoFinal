@@ -15,7 +15,7 @@ import { UtilsService } from '../services/utils.service';
   encapsulation:ViewEncapsulation.None
 })
 export class FolderPage implements OnInit {
-  defaultImage:string="src/assets/noimage.png";
+  defaultImage:string="../../assets/noimage.png";
   image:string="";
 
   typePassWord:string="Password";
