@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Appliance } from 'src/app/models/Appliance';
 import { SelectSearch } from 'src/app/models/SelectSearch';
 import { TableColumn } from 'src/app/models/table_colums';
+import { TemperatureRecord } from 'src/app/models/TemperatureRecord';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { PdfService } from 'src/app/services/pdf.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddEditTemperatureRecordPage } from '../add-edit-temperature-record/add-edit-temperature-record.page';
 
@@ -31,9 +33,10 @@ export class TemperatureRecordPage implements OnInit {
   public applianceEdit:Appliance=null;
 
   public form:FormGroup;
+  private data:TemperatureRecord[]=[];
 
   constructor(private utils:UtilsService,private api:ApiService,private auth:AuthenticationService,
-    private fb: FormBuilder) { 
+    private fb: FormBuilder,private pdf:PdfService) { 
       this.form=this.fb.group({
         name:['',Validators.required]
       });
@@ -120,6 +123,21 @@ export class TemperatureRecordPage implements OnInit {
   reset(){
     this.form.reset();
     this.applianceEdit=null;
+  }
+
+
+  public getDates(MeatRecords:TemperatureRecord[]){
+    this.data=MeatRecords;
+  }
+
+  public async doPDF(){
+    
+    let body:any[]=[];
+    body.push(["ELECTRODOMÉSTICO","TEMPERATURA","FECHA","FIRMADO"]);
+    this.data.forEach((element)=>{
+      body.push([element.appliance.name,element.temperature,element.date,element.signed.name]);
+    });
+    await this.pdf.generatePdf(body,"Registro Temperatura");
   }
 
 

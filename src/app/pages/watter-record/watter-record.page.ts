@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectSearch } from 'src/app/models/SelectSearch';
 import { TableColumn } from 'src/app/models/table_colums';
+import { WasteRecord } from 'src/app/models/WasteRecord';
 import { WatterRecord } from 'src/app/models/WatterRecord';
+import { PdfService } from 'src/app/services/pdf.service';
 import { AddEditWatterRecordPage } from '../add-edit-watter-record/add-edit-watter-record.page';
 
 @Component({
@@ -22,9 +24,24 @@ export class WatterRecordPage implements OnInit {
   
   public model:string="WatterRecord";
   public ref:any=AddEditWatterRecordPage;
-  constructor() { }
+  private data:WatterRecord[]=[];
+  constructor(private pdf:PdfService) { }
 
   ngOnInit() {
+  }
+
+  public getDates(watter:WatterRecord[]){
+    this.data=watter;
+  }
+
+  public async doPDF(){
+    
+    let body:any[]=[];
+    body.push(["PUNTO MUESTREO","CONTROL ORGANOLÉPTICO","FECHA","CONDICIÓN","FIRMADO"]);
+    this.data.forEach((element)=>{
+      body.push([element.samplingpoint,element.organoleptic_control,element.date,element.condition.name,element.signed.name]);
+    });
+    await this.pdf.generatePdf(body,"Registro Agua");
   }
 
 }

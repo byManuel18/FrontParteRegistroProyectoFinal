@@ -101,7 +101,6 @@ export class ApiService {
     const url=environment.endpointApi+model.toLowerCase();
     return new Promise<any|null>((resolve,reyect)=>{
       this.httpApi.setDataSerializer('json');
-      console.log(JSON.stringify(obj));
       this.httpApi.post(url,obj,this.header).then((data)=>{
         if(data){
           let objectresult:any=JSON.parse(data.data);

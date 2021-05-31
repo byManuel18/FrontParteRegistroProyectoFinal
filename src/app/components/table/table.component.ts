@@ -50,6 +50,7 @@ export class TableComponent implements OnInit,AfterViewInit {
   @ViewChild('IonDate') ionDate:ElementRef<IonSearchbar>;
   
   @Output() messageEvent = new EventEmitter<any>();
+  @Output() messageEventArrayDates = new EventEmitter<any[]>();
  
   public pageSize = 10;
   public pageSizeOptions: number[] = [5, 10, 20, 50];
@@ -96,6 +97,7 @@ export class TableComponent implements OnInit,AfterViewInit {
     }
     this.dataSource = new MatTableDataSource();
     this.dataSource.data=this.data;
+    this.messageEventArrayDates.emit(this.data);
 
     if($event==null){
       if(this.eventChargeFristTime||this.fristCharge){

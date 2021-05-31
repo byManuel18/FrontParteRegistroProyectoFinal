@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectSearch } from 'src/app/models/SelectSearch';
 import { TableColumn } from 'src/app/models/table_colums';
+import { TraceabilityOfMeat } from 'src/app/models/TraceabilityOfMeat';
+import { PdfService } from 'src/app/services/pdf.service';
 import { AddEditTraceabilityOfMeatPage } from '../add-edit-traceability-of-meat/add-edit-traceability-of-meat.page';
 
 @Component({
@@ -26,10 +28,24 @@ export class TraceabilityOfMeatPage implements OnInit {
   public model:string="TraceabilityOfMeat";
   public ref:any=AddEditTraceabilityOfMeatPage;
   public css_modal:string[]=["modal-trazmeat"];
-
-  constructor() { }
+  private data:TraceabilityOfMeat[]=[];
+  constructor(private pdf:PdfService) { }
 
   ngOnInit() {
+  }
+
+  public getDates(trazmeat:TraceabilityOfMeat[]){
+    this.data=trazmeat;
+  }
+
+  public async doPDF(){
+    
+    let body:any[]=[];
+    body.push(["PRODUCTO","DISTRIBUIDOR","LOTE","FECHA LLEGADA","FECHA INICIO","FECHA FIN","FIRMADO"]);
+    this.data.forEach((element)=>{
+      body.push([element.meatrecord.product,element.meatrecord.supplier,element.meatrecord.lote,element.arrivaldate,element.startdate,element.enddate,element.signed.name]);
+    });
+    await this.pdf.generatePdf(body,"Registro Trazabilidad Carne");
   }
 
 }

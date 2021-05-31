@@ -6,5 +6,12 @@
 </ion-header>
 
 <ion-content>
-  <app-table [searachSelect]="this.searachSelect" [css_modal]="this.css_modal" [model]="this.model" [columns]="this.columns" [ref]="this.ref"></app-table>
+  <app-table [searachSelect]="this.searachSelect" [css_modal]="this.css_modal" [model]="this.model" [columns]="this.columns" [ref]="this.ref" (messageEventArrayDates)="this.getDates($event)"></app-table>
+  <ion-grid>
+    <ion-row justify-content-around>
+      <ion-col>
+        <ion-button (click)="this.doPDF()">Exportar a PDF</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

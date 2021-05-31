@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MeatRecord } from 'src/app/models/MeatRecord';
 import { SelectSearch } from 'src/app/models/SelectSearch';
 import { TableColumn } from 'src/app/models/table_colums';
+import { PdfService } from 'src/app/services/pdf.service';
 import { AddEditMeatRecordPage } from '../add-edit-meat-record/add-edit-meat-record.page';
 
 @Component({
@@ -21,10 +22,25 @@ export class MeatrecordPage implements OnInit {
   ];
   public model:string="MeatRecord";
   public ref:any=AddEditMeatRecordPage;
-  
-  constructor() { }
+  private data:MeatRecord[]=[];
+  constructor(private pdf:PdfService) { }
 
   ngOnInit() {
+  }
+
+
+  public getDates(MeatRecords:MeatRecord[]){
+    this.data=MeatRecords;
+  }
+
+  public async doPDF(){
+    
+    let body:any[]=[];
+    body.push(["PRODUCTO","DISTRIBUIDOR","FECHA","FIRMADO"]);
+    this.data.forEach((element)=>{
+      body.push([element.product,element.supplier,element.date,element.signed.name]);
+    });
+    await this.pdf.generatePdf(body,"Registro Carne");
   }
 
 }

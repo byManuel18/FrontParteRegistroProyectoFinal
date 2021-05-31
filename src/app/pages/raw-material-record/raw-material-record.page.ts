@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RawMaterialRecord } from 'src/app/models/RawMaterialRecord';
 import { SelectSearch } from 'src/app/models/SelectSearch';
 import { TableColumn } from 'src/app/models/table_colums';
+import { PdfService } from 'src/app/services/pdf.service';
 import { AddEditRawMaterialRecordPage } from '../add-edit-raw-material-record/add-edit-raw-material-record.page';
 
 @Component({
@@ -26,10 +27,24 @@ export class RawMaterialRecordPage implements OnInit {
 
   public model:string="RawMaterialRecord";
   public ref:any=AddEditRawMaterialRecordPage;
-  
-  constructor() { }
+  private data:RawMaterialRecord[]=[];
+  constructor(private pdf:PdfService) { }
 
   ngOnInit() {
+  }
+
+  public getDates(rawMaterials:RawMaterialRecord[]){
+    this.data=rawMaterials;
+  }
+
+  public async doPDF(){
+    
+    let body:any[]=[];
+    body.push(["PRODUCTO","DISTRIBUIDOR","LOTE","FECHA LLEGADA","FECHA INICIO","FECHA FIN","FIRMADO"]);
+    this.data.forEach((element)=>{
+      body.push([element.commodity,element.supplier,element.lote,element.arrival_date,element.start_date,element.end_date,element.signed.name]);
+    });
+    await this.pdf.generatePdf(body,"Registro Trazabilidad Materia Prima");
   }
 
 }
